@@ -1,12 +1,5 @@
-import { tasks as data } from "./tasks";
-import { useState, useEffect } from "react";
+function TaskList({tasks}) {
 
-function TaskList() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    setTasks(data);
-  }, []);
 
   if (tasks.length === 0) {
     return <h1>Aún no hay tareas</h1>;
@@ -16,7 +9,8 @@ function TaskList() {
     <div>
       {tasks.map((task) => (
         <div key={task.id}>
-          <h1>{task.description}</h1>
+          <h1>{task.title}</h1>
+          <p>{task.description}</p>
         </div>
       ))}
     </div>
