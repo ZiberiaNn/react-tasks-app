@@ -1,6 +1,6 @@
-import TaskForm from "./TaskForm";
-import TaskList from "./TaskList";
-import { tasks as data } from "./tasks";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+import { tasks as data } from "./data/tasks";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -10,21 +10,25 @@ function App() {
     setTasks(data);
   }, []);
 
-  function createTask(taskTitle) {
+  function createTask(task) {
     setTasks([
       ...tasks,
       {
         id: tasks.length,
-        title: taskTitle,
-        description: "nueva tarea"
+        title: task.title,
+        description: task.description
       },
     ]);
+  }
+
+  function deleteTask(taskId){
+    setTasks(tasks.filter(task=>task.id!==taskId))
   }
 
   return (
     <>
       <TaskForm createTask={createTask} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} deleteTask={deleteTask}/>
     </>
   );
 }
